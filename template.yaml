@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Fastly Log Publisher. Fetch Fastly Logs from S3 bucket, publish to Cloudwatch.
+Parameters:
+  ProjectName:
+    Type: String
+  Environment:
+    Type: String
+  LogGroupName:
+    Type: String
+  LogStreamName:
+    Type: String
+Globals:
+  Function:
+    Runtime: nodejs8.10
+    Tags:
+      Environment: !Ref Environment
+      InventoryCode: logpublisher-serverless
+      ProductCode: PRD00000220
+
+Resources:
+########################################################################################################################
+  FunctionFastlyLogPublisher:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: FastlyLogPublisher.handler
+      Description: Lambda function to fetch logs and publish to Cloudwatch.
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+          LogGroupName: !Ref LogGroupName
+          LogStreamName: !Ref LogStreamName
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Join ['', [!Ref ProjectName, '-', !Ref Environment]]
+      Events:
+        S3:
+          Type: S3
+          Properties:
+            Bucket: !Ref S3BucketFastlyLogPublisher
+            Events: s3:ObjectCreated:*
+########################################################################################################################
+  S3BucketFastlyLogPublisher:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Join ['', [!Ref ProjectName, '-', !Ref Environment]]
