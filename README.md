@@ -1,4 +1,4 @@
-![diagram](https://raw.githubusercontent.com/evfurman/fastly-log-publisher/master/diagram.jpg)
+![diagram](https://cdn.rawgit.com/evfurman/fastly-log-publisher/12b4282a/diagram.svg)
 
 ```mermaid
 graph LR;
