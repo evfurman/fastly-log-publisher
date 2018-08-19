@@ -1,18 +1,5 @@
 ![diagram](https://cdn.rawgit.com/evfurman/fastly-log-publisher/12b4282a/diagram.svg)
 
-```mermaid
-graph LR;
-  fastly-logs[fa:fa-shower fastly access logs]-->s3-bucket[fa:fa-square s3 bucket];
-  s3-bucket-->log-publisher-lambda[λ publish];
-  log-publisher-lambda-->cw[fa:fa-cogs cloudwatch]
-
-style s3-bucket fill:#FF3333
-style fastly-logs fill:#FFFF00
-style cw fill:#7ed15d
-style log-publisher-lambda fill:#ff9900
-
-```
-
 **The following steps are automated as part of a Gitlab-CI pipeline, but you can also run them manually.**
 
 ## Install
