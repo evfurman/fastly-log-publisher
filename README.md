@@ -1,3 +1,5 @@
+![diagram](https://raw.githubusercontent.com/evfurman/fastly-log-publisher/master/diagram.svg)
+
 ```mermaid
 graph LR;
   fastly-logs[fa:fa-shower fastly access logs]-->s3-bucket[fa:fa-square s3 bucket];
