@@ -32,14 +32,21 @@ Resources:
           LogGroupName: !Ref LogGroupName
           LogStreamName: !Ref LogStreamName
       Policies:
-        - S3ReadPolicy:
-            BucketName: !Join ['', [!Ref ProjectName, '-', !Ref Environment]]
+        - AWSLambdaBasicExecutionRole
       Events:
         S3:
           Type: S3
           Properties:
             Bucket: !Ref S3BucketFastlyLogPublisher
             Events: s3:ObjectCreated:*
+########################################################################################################################
+  PermissionFastlyLogPublisher:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref FunctionFastlyLogPublisher
+      Principal: s3.amazonaws.com
+      SourceArn: !GetAtt S3BucketFastlyLogPublisher.Arn
 ########################################################################################################################
   S3BucketFastlyLogPublisher:
     Type: 'AWS::S3::Bucket'
