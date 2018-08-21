@@ -7,7 +7,7 @@ The easiest way to install SAM CLI is using pip.
   
 `pip install aws-sam-cli`  
   
-https://docs.aws.amazon.com/lambda/latest/dg/sam-cli-requirements.html  
+[https://docs.aws.amazon.com/lambda/latest/dg/sam-cli-requirements.html](https://docs.aws.amazon.com/lambda/latest/dg/sam-cli-requirements.html)
 
 ## Validate
   
